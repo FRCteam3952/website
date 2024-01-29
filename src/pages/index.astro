@@ -1,0 +1,170 @@
+---
+import Layout from "@layouts/Layout.astro";
+// import Card from "@components/Card.astro";
+import { Wrench } from "lucide-astro";
+// import Carousel from "svelte-light-carousel";
+// import work from "@assets/work.jpg";
+// import group from "@assets/group-photo.jpg";
+// import tape from "@assets/tape.jpg";
+// import robo from "@assets/robot-in-comp.jpg";
+//import ImgCarousel from "@components/ImgCarousel.svelte";
+import { Image } from "astro:assets";
+import ImgCarousel from "@components/ImgCarousel.astro";
+import HumanCard from "@components/HumanCard.astro";
+// const slides = [
+// 	[group, "group photo"],
+// 	[work, "people working on robot"],
+// 	[tape, "person pulling tape out to fix robot"],
+// 	[robo, "robot at competition"],
+// ];
+---
+
+<Layout description="The main page for Troy FRC" title="Troy Web Dev">
+	<!--TODO: figure out how to center this?? WHY IS NOTHING WOKRING???-->
+	<ul class="flex justify-around place-content-center">
+		<!--TODO: replace this carousel, yes ive rewritten it twice, but a pure css carousel is weird cuz it makes the viewport jump around so i wanna chanfe it ugughghghghghgh, this has taken like soo much time, most of my time was spent on this why did i, why dont i just think of a different way of displaying these images! -->
+		<li><ImgCarousel class="flex-1" /></li>
+		<li class="w-full flex-1">
+			<h2>Latest Video:</h2>
+			<iframe
+				src="https://www.youtube-nocookie.com/embed?listType=playlist&list=UUGGlzb3eHnoaBw-EgcE6bJQ"
+				allowfullscreen
+			>
+			</iframe>
+		</li>
+	</ul>
+	<ul class="flex justify-around">
+		<li>
+			<h2>What we do</h2>
+			<p>We create robots... Write paragraph here :)</p>
+		</li>
+		<li>
+			<!--TODO: put pic of the beautiful rovbot-->
+			<Image src={import("@assets/board/yavor.png")} alt="robot" />
+		</li>
+	</ul>
+	<div class="flex flex-col justify-center text-center">
+		<h2>Our Team</h2>
+		<!--https://discord.com/channels/580892062379933716/580895892664745984/1115425920849809539-->
+		<ul>
+			<li class="divider">Admin <!--TODO: put an icon here--></li>
+			<!--TODO: fix mobile scaling -->
+			<li>
+				<ul class="flex justify-center">
+					<HumanCard img="yavor.png" name="Pali" position="Admin Pres" />
+					<HumanCard
+						img="yavor.png"
+						name="Bethania Dagim"
+						position="Outreach Head"
+					/>
+					<HumanCard
+						img="yavor.png"
+						name="Avni Patil"
+						position="Business Head"
+					/>
+					<HumanCard
+						img="yavor.png"
+						name="Anastasia Ong"
+						position="Media Head"
+					/>
+					<HumanCard
+						img="yavor.png"
+						name="Yavor Kolev"
+						position="Webmaster"
+						desc="made this site :O"
+					/>
+				</ul>
+			</li>
+			<li class="divider">Build <Wrench /></li>
+			<li>
+				<!--TODO: make auto columns, and responsive scaling -->
+				<ul class="inline-grid grid-cols-4 justify-center">
+					<HumanCard img="yavor.png" name="Isaac" position="Build President" />
+					<HumanCard
+						img="yavor.png"
+						name="Thomas Nguyen-Ta"
+						position="Design Head"
+					/>
+					<HumanCard
+						img="yavor.png"
+						name="Addison Chan"
+						position="Software Head"
+					/>
+					<HumanCard
+						img="yavor.png"
+						position="Software Lead"
+						name="Ivan Zimmerman"
+					/>
+					<HumanCard img="yavor.png" position="Mech Lead" name="Phong Vo" />
+					<HumanCard img="yavor.png" position="Mech Lead" name="Tim Zhang" />
+					<HumanCard
+						img="yavor.png"
+						position="Safety Captain"
+						name="Lily Chau"
+					/>
+					<HumanCard
+						img="yavor.png"
+						position="Safety Captain"
+						name="Barbara Cao"
+					/>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="flex justify-center flex-col">
+		<h2 class="text-center">We couldn't do this without</h2>
+		<ul class="flex justify-around gap-10">
+			<li>
+				<!-- Add better styling and use images instead of text :) -->
+				<h2>Our Sponsors</h2>
+				<ul class="list-disc">
+					<li>Some sponsor!!!!</li>
+					<li>Some sponsor!!!!</li>
+					<li>Some sponsor!!!!</li>
+					<li>Some sponsor!!!!</li>
+					<li>Some sponsor!!!!</li>
+					<li>Some sponsor!!!!</li>
+				</ul>
+			</li>
+			<li>
+				<h2>Our Donors</h2>
+				<ul class="list-disc">
+					<li>Some donor!!!!!!</li>
+					<li>Some donor!!!!!!</li>
+					<li>Some donor!!!!!!</li>
+					<li>Some donor!!!!!!</li>
+					<li>Some donor!!!!!!</li>
+					<li>Some donor!!!!!!</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<style>
+		/*
+		TODO: switch all of this to use tailwindcss
+	*/
+		a {
+			text-decoration: none;
+			color: white;
+		}
+		#about {
+			font-size: 48pt;
+			font-family: VT323;
+			margin: 0;
+		}
+		#join {
+			text-decoration: underline wavy 2px;
+			text-decoration-skip-ink: none;
+			font-size: 32pt;
+		}
+		#cards {
+			display: block;
+			list-style: none;
+			gap: 10px;
+			text-align: center;
+			width: 100%;
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</Layout>

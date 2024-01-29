@@ -1,0 +1,83 @@
+---
+interface Props {
+	title: string;
+	body: string;
+	icon?: any;
+}
+
+const { title, body, icon = null } = Astro.props;
+const Icon = icon;
+---
+
+<li class="card">
+	<h2>
+		{
+			icon !== null && (
+				<span>
+					<Icon class="icon" />
+				</span>
+			)
+		}{title}
+	</h2>
+	<p class="center">
+		{body}
+	</p>
+</li>
+<style>
+	.icon {
+		width: 25;
+		padding-right: 5px;
+	}
+	
+	.card h2 {
+		text-align: center;
+	}
+
+	.card {
+		position: relative;
+		width: 800px;
+		border-radius: 30px;
+		border: 2px solid white;
+		padding: 10px;
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+
+	.card p {
+		font-size: 20px;
+	}
+
+	li:nth-child(odd) {
+		opacity: 0;
+		animation: slideright 1s ease-out 0.5s 1 alternate;
+		animation-fill-mode: both;
+	}
+
+	@keyframes slideright {
+		from {
+			opacity: 0%;
+			left: 35%;
+		}
+		to {
+			opacity: 100%;
+			left: 0%;
+		}
+	}
+
+	li:nth-child(even) {
+		opacity: 0;
+		animation: slideleft 1s ease-out 0.5s 1 alternate;
+		animation-fill-mode: both;
+	}
+
+	@keyframes slideleft {
+		from {
+			opacity: 0%;
+			left: -35%;
+		}
+		to {
+			opacity: 100%;
+			left: 0%;
+		}
+	}
+</style>

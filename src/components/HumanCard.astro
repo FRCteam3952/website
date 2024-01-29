@@ -1,0 +1,33 @@
+---
+interface Props {
+  img: string;
+  position: string;
+  name: string;
+  desc?: string;
+}
+
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+const { name, img, position, desc = "Does stuff" } = Astro.props;
+const img_path = "/src/assets/board/" + img;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/board/*.{jpeg,jpg,png,gif}",
+);
+if (!images[img_path])
+  throw new Error(
+    `"${img}" does not exist in glob: "src/assets/board/*.{jpeg,jpg,png,gif}"`,
+  );
+---
+
+<li class="card w-96">
+  <figure class="px-10 pt-10">
+    <Image src={images[img_path]()} alt={"An image of " + name} />
+  </figure>
+  <div class="card-body items-center text-center">
+    <h2 class="card-title">
+      {name}
+      <div class="badge badge-default">{position}</div>
+    </h2>
+    <p>{desc}</p>
+  </div>
+</li>

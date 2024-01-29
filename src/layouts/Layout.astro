@@ -1,0 +1,200 @@
+---
+import { Schema } from "astro-seo-schema";
+import { Seo } from "astro-seo-meta";
+import { Image } from "astro:assets";
+import logo from "@assets/logo.svg";
+import { Discord, Googleclassroom } from "simple-icons-astro";
+import "@fontsource-variable/handjet";
+import "@fontsource/gruppo";
+import "@fontsource/vt323";
+import "@fontsource/courier-prime";
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<Seo
+			title={title}
+			description={description}
+			icon="favicon.svg"
+			keywords={["troy", "club", "robotics", "first", "frc"]}
+			themeColor="#000000"
+			colorScheme="dark"
+			facebook.type="website"
+			twitter.card="summary"
+		/>
+		<Schema
+			item={{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				parentOrganization: {
+					"@type": "School",
+					name: "Troy High School",
+					url: "https://www.fjuhsd.org/Troy",
+				},
+				name: "Troy FRC",
+				description:
+					"A Troy High School club for the First Robotics Competition",
+				knowsAbout: ["robotics"],
+				logo: {
+					"@type": "ImageObject",
+					name: "Troy FRC logo",
+					contentUrl: "favicon.svg",
+				},
+				address: {
+					"@type": "PostalAddress",
+					addressCountry: "USA",
+					addressLocality: "Fullerton",
+					addressRegion: "California",
+					postalCode: "92831",
+					streetAddress: "2200 Dorothy Ln",
+				},
+			}}
+			}
+		/>
+	</head>
+	<body>
+		<header>
+			<span id="logo-wrap" class="pl-5" style="overflow:hidden">
+				<Image src={logo} alt="the logo" width="100" />
+				<!--TODO: replace with monochromatic logo -->
+				<h1>Troy 3952</h1>
+				<style>
+					/* TODO: use tailwindcss */
+					h1,
+					img {
+						position: relative;
+						animation: slidetop 1s ease-out 0s 1 alternate;
+						margin: 0;
+					}
+
+					@keyframes slidetop {
+						from {
+							opacity: 0%;
+							top: -27%;
+						}
+						to {
+							opacity: 100%;
+							top: 0%;
+						}
+					}
+					@keyframes slideleft {
+						from {
+							opacity: 0%;
+							left: 27%;
+						}
+						to {
+							opacity: 100%;
+							left: 0%;
+						}
+					}
+				</style>
+			</span>
+			<ul class="pr-5" id="nav">
+				<li>
+					<a href="/discord" target="_blank"
+						><button class="flex gap-2"><Discord /><br />Discord</button></a
+					>
+				</li>
+				<li>
+					<a href="/gclass" target="_blank"
+						><button class="flex gap-2"
+							><Googleclassroom /><br />Classroom</button
+						></a
+					>
+				</li>
+			</ul>
+		</header>
+		<main><slot /></main>
+		<footer>
+			<style>
+				ul {
+					padding-top: 2em;
+				}
+			</style>
+		</footer>
+		<style is:global>
+			button {
+				display: block-inline;
+				background: none;
+				color: #6e0000;
+				font-family: "Courier Prime";
+				padding: 5px;
+				font-size: 12pt;
+				border: none;
+				border-radius: 10px;
+			}
+			button:hover {
+				transform: scale(1.1);
+			}
+			button:active {
+				transform: scale(1.1);
+				background: grey;
+			}
+			#nav {
+				list-style: none;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 25px;
+				margin: 0;
+				padding: 0;
+			}
+			header {
+				display: flex;
+				justify-content: space-between;
+				position: sticky;
+				top: 0;
+				background: #000;
+				z-index: 2;
+			}
+			/*footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+			}*/
+			.center {
+				text-align: center;
+			}
+			#logo-wrap {
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+				align-items: center;
+			}
+			h1 {
+				font-family: Gruppo;
+				font-weight: 700;
+				font-size: 60pt;
+				color: #6e0000;
+			}
+			h2 {
+				font-family: "Handjet Variable";
+				color: #6e0000;
+				font-weight: 700;
+				font-size: 24pt;
+			}
+			p {
+				font-family: "Courier Prime";
+			}
+			body {
+				background: #000 /* #6e0000 */;
+			}
+		</style>
+		<style>
+			body {
+				overflow-x: hidden;
+			}
+		</style>
+	</body>
+</html>
